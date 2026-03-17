@@ -3,7 +3,7 @@
  * BullMQ job definitions and workers
  */
 
-import { Queue, Worker, QueueOptions, WorkerOptions } from 'bullmq';
+import { Queue, Worker, QueueOptions } from 'bullmq';
 import { getConfig } from '../config.js';
 import pino from 'pino';
 

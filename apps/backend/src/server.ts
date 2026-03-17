@@ -58,7 +58,7 @@ async function createServer() {
   await fastify.register(fastifyWebsocket);
 
   // Request logging
-  fastify.addHook('onRequest', async (request, reply) => {
+  fastify.addHook('onRequest', async (request, _reply) => {
     logger.debug({ method: request.method, url: request.url }, 'Incoming request');
   });
 

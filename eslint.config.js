@@ -26,15 +26,7 @@ export default [
           varsIgnorePattern: '^_'
         }
       ],
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/explicit-function-return-types': [
-        'warn',
-        {
-          allowExpressions: true,
-          allowTypedFunctionExpressions: true,
-          allowHigherOrderFunctions: true
-        }
-      ]
+      '@typescript-eslint/no-explicit-any': 'warn'
     }
   }
 ];
