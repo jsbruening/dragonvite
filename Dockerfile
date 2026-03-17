@@ -14,8 +14,14 @@ COPY package.json tsconfig.json tsconfig.node.json ./
 COPY apps/ ./apps/
 COPY packages/ ./packages/
 
+# Install OpenSSL (required by Prisma engine on Alpine)
+RUN apk add --no-cache openssl
+
 # Install dependencies
 RUN pnpm install --frozen-lockfile
+
+# Generate Prisma client (creates model types in .prisma/client/)
+RUN pnpm --filter @dragonvite/database run generate
 
 # Build packages and backend
 RUN pnpm run build
