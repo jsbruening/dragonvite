@@ -51,6 +51,24 @@ describe('loadConfig', () => {
     const config = loadConfig();
     expect(config.PORT).toBe(4000);
   });
+
+  it('re-throws non-Zod errors', async () => {
+    const { loadConfig } = await import('./config.js');
+    const original = process.env.DATABASE_URL;
+    Object.defineProperty(process, 'env', {
+      get: () => { throw new TypeError('env read error'); },
+      configurable: true,
+    });
+    try {
+      expect(() => loadConfig()).toThrow(TypeError);
+    } finally {
+      Object.defineProperty(process, 'env', {
+        value: { ...validEnv, DATABASE_URL: original },
+        configurable: true,
+        writable: true,
+      });
+    }
+  });
 });
 
 describe('getConfig', () => {
