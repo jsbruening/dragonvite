@@ -18,7 +18,7 @@ COPY packages/ ./packages/
 RUN pnpm install --frozen-lockfile
 
 # Build packages and backend
-RUN pnpm --filter @dragonvite/shared run type-check && pnpm run build
+RUN pnpm --filter @dragonvite/shared run type-check && pnpm --filter @dragonvite/backend run type-check && pnpm run build
 
 # Stage 2: Runtime
 FROM node:20-alpine
