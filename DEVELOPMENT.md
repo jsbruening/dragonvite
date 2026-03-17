@@ -31,6 +31,7 @@ cp .env.example .env.local
 ```
 
 Edit `.env.local` with your local values:
+
 ```env
 DATABASE_URL=postgresql://localhost/dragonvite
 REDIS_URL=redis://localhost:6379
@@ -57,6 +58,7 @@ doppler run -- env | grep DOPPLER
 ```
 
 Then run commands with Doppler:
+
 ```bash
 doppler run pnpm dev      # Injects secrets automatically
 doppler run pnpm build
@@ -74,6 +76,7 @@ pnpm dev
 ```
 
 This starts:
+
 1. **Redis** (6379) – For caching and job queue
 2. **Bull Board** (3001) – Visual job queue management
 3. **Backend** (3000, internal) – Fastify API server
@@ -81,6 +84,7 @@ This starts:
 5. **Nginx** (80) – Frontend & reverse proxy
 
 **Access URLs:**
+
 - Frontend: http://localhost
 - API: http://localhost/api
 - Bull Board: http://localhost:3001
@@ -282,6 +286,7 @@ pnpm --filter @dragonvite/database generate
 4. Prisma Client regenerates automatically
 
 **Example schema change:**
+
 ```prisma
 // packages/database/prisma/schema.prisma
 model User {
@@ -289,10 +294,10 @@ model User {
   email String  @unique
   name  String?
   role  Role    @default(USER)
-  
+
   // New field
   phone String?
-  
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -304,6 +309,7 @@ enum Role {
 ```
 
 Then:
+
 ```bash
 pnpm db:push
 ```
@@ -334,6 +340,7 @@ pnpm type-check
 SonarQube analyzes code for bugs, vulnerabilities, and code smells.
 
 **Access dashboard:**
+
 - URL: http://localhost:9000
 - Default login: admin/admin
 
@@ -345,11 +352,13 @@ SonarQube analyzes code for bugs, vulnerabilities, and code smells.
 4. Add to GitHub Secrets: `SONAR_TOKEN`
 
 **Run local analysis:**
+
 ```bash
 pnpm sonar
 ```
 
 **View results:**
+
 - Dashboard shows all issues
 - Filter by severity: Blocker, Critical, Major, Minor, Info
 - Click issue to see fix suggestions
@@ -415,6 +424,7 @@ pnpm test:e2e -- --debug
 **Debug Backend:**
 
 1. Create `.vscode/launch.json`:
+
 ```json
 {
   "version": "0.2.0",
@@ -448,6 +458,7 @@ pnpm test:e2e -- --debug
 ### Logging
 
 **Backend (Pino):**
+
 ```typescript
 import pino from 'pino';
 
@@ -457,6 +468,7 @@ logger.error({ error }, 'Database error');
 ```
 
 **Frontend:**
+
 ```typescript
 console.log('Debug info', data);
 console.error('Error occurred', error);
@@ -547,7 +559,7 @@ model User {
   id    String @id
   email String @unique
   name  String?
-  
+
   @@index([name])  // Add index for name queries
 }
 ```

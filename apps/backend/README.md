@@ -45,9 +45,11 @@ src/
 ## 🔌 API Endpoints
 
 ### Health Check
+
 - `GET /api/health` – Server health status
 
 ### Users (Example)
+
 - `GET /api/users/:id` – Get user by ID
 - `POST /api/users` – Create new user
 - `PUT /api/users/:id` – Update user
@@ -56,12 +58,14 @@ src/
 ## 🔌 Socket.io Events
 
 ### Game Events
+
 - `game:join` – User joins a game room
 - `game:move` – Player moves in game
 - `game:state` – Broadcast game state to room
 - `game:user-joined` – Notify others when user joins
 
 ### Chat Events
+
 - `chat:message` – Send chat message
 - `chat:new-message` – Receive chat message
 

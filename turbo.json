@@ -1,9 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.local", ".eslintrc", "prettier.config.js"],
-  "globalEnv": [
-    "TURBO_WORKSPACE"
-  ],
+  "globalEnv": ["TURBO_WORKSPACE"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build", "type-check"],

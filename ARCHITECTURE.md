@@ -5,6 +5,7 @@ This document describes the system architecture, component interactions, and des
 ## System Overview
 
 Dragonvite is a production-ready monorepo with:
+
 - **Frontend**: React + Vite SPA served via Nginx
 - **Backend**: Fastify REST API + Socket.io real-time
 - **Database**: Supabase PostgreSQL with Prisma ORM
@@ -112,6 +113,7 @@ User sees final result
 ### 3. Data Synchronization
 
 **Server State (TanStack Query + Database):**
+
 ```
 GET /api/users/me
     │
@@ -124,6 +126,7 @@ Consistent server data across components
 ```
 
 **Client State (Zustand):**
+
 ```
 UI selection, form inputs, transient flags
     │
@@ -171,6 +174,7 @@ src/
 ```
 
 **Key Dependencies:**
+
 - `react`: UI framework
 - `vite`: Build tool
 - `@tanstack/react-query`: Server state
@@ -209,6 +213,7 @@ src/
 ```
 
 **Key Dependencies:**
+
 - `fastify`: HTTP server
 - `@fastify/websocket`: WebSocket support
 - `socket.io`: Real-time events
@@ -236,6 +241,7 @@ src/
 **Imported by:** Frontend + Backend
 
 **Example types:**
+
 ```typescript
 export type User = { id: string; email: string; name?: string };
 export type GameEntity = { id: string; type: 'player' | 'npc'; x: number; y: number };
@@ -255,6 +261,7 @@ prisma/
 ```
 
 **Key Features:**
+
 - Type-safe schema
 - Auto-migrations via `pnpm db:migrate`
 - Prisma Studio: `pnpm db:studio`
@@ -347,21 +354,21 @@ User sees confirmation
 
 ## Technology Justifications
 
-| Component | Technology | Rationale |
-|-----------|-----------|-----------|
-| **Frontend Build** | Vite | Instant HMR, fast production builds, better DX than CRA |
-| **Frontend Framework** | React 18 | Large ecosystem, component-driven, well-documented |
-| **Server State** | TanStack Query | Auto-sync, caching, deduplication, background refetch |
-| **Client State** | Zustand | Minimal boilerplate, Immer for immutable updates |
-| **Backend Server** | Fastify | Fast, plugin ecosystem, WebSocket support, TypeScript ready |
-| **Real-Time** | Socket.io | Rooms/namespaces, fallbacks, auto-reconnect |
-| **Database** | Supabase + Prisma | Managed PostgreSQL, type-safe ORM, auto-migrations |
-| **Async Jobs** | BullMQ + Redis | Persistent queue, workers, retry logic, Bull Board UI |
-| **Validation** | Zod | Runtime type checking, TypeScript inference |
-| **Monorepo** | Turborepo + pnpm | Task orchestration, caching, parallel builds |
-| **Containerization** | Docker | Consistent local/prod environments |
-| **Reverse Proxy** | Nginx | Fast, lightweight, WebSocket support |
-| **Code Quality** | SonarQube | Bugs, vulnerabilities, code smells detection |
+| Component              | Technology        | Rationale                                                   |
+| ---------------------- | ----------------- | ----------------------------------------------------------- |
+| **Frontend Build**     | Vite              | Instant HMR, fast production builds, better DX than CRA     |
+| **Frontend Framework** | React 18          | Large ecosystem, component-driven, well-documented          |
+| **Server State**       | TanStack Query    | Auto-sync, caching, deduplication, background refetch       |
+| **Client State**       | Zustand           | Minimal boilerplate, Immer for immutable updates            |
+| **Backend Server**     | Fastify           | Fast, plugin ecosystem, WebSocket support, TypeScript ready |
+| **Real-Time**          | Socket.io         | Rooms/namespaces, fallbacks, auto-reconnect                 |
+| **Database**           | Supabase + Prisma | Managed PostgreSQL, type-safe ORM, auto-migrations          |
+| **Async Jobs**         | BullMQ + Redis    | Persistent queue, workers, retry logic, Bull Board UI       |
+| **Validation**         | Zod               | Runtime type checking, TypeScript inference                 |
+| **Monorepo**           | Turborepo + pnpm  | Task orchestration, caching, parallel builds                |
+| **Containerization**   | Docker            | Consistent local/prod environments                          |
+| **Reverse Proxy**      | Nginx             | Fast, lightweight, WebSocket support                        |
+| **Code Quality**       | SonarQube         | Bugs, vulnerabilities, code smells detection                |
 
 ## Deployment Architecture
 
@@ -397,6 +404,7 @@ Oracle VM (2 vCPU, 4GB RAM, $0/month)
 ```
 
 **Deployment Flow:**
+
 ```
 1. Engineer pushes to GitHub `main`
 2. GitHub Actions build Docker image
@@ -465,6 +473,7 @@ Prisma Queries:
 ### Current Setup (Always-Free Tier)
 
 ✅ Works well for:
+
 - MVP / prototype
 - Small team (<50 concurrent users)
 - Low-traffic game
@@ -481,6 +490,7 @@ To handle more load:
 5. **Frontend**: Already static files + CDN ready
 
 **Scaling path:**
+
 ```
 Current: 1 VM, 1 DB
     │
@@ -499,6 +509,7 @@ Kubernetes cluster (if needed)
 ### Logs
 
 **Backend (Pino):**
+
 ```typescript
 logger.info({ userId: 123 }, 'User joined game');
 logger.error({ error }, 'Database query failed');

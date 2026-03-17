@@ -5,6 +5,7 @@
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js >= 18.17.0
 - pnpm >= 8.0.0
 - Docker & Docker Compose (for local development with all services)
@@ -13,23 +14,27 @@
 ### Installation
 
 1. **Clone the repository:**
+
 ```bash
 git clone <repo-url>
 cd dragonvite
 ```
 
 2. **Install dependencies:**
+
 ```bash
 pnpm install
 ```
 
 3. **Setup environment variables:**
+
 ```bash
 cp .env.example .env.local
 # Edit .env.local with your configuration
 ```
 
 4. **Using Doppler (recommended for team):**
+
 ```bash
 # Install Doppler CLI: https://docs.doppler.com/docs/cli
 doppler login
@@ -41,11 +46,13 @@ doppler run pnpm dev
 ### Development
 
 **Start all services locally with Docker Compose:**
+
 ```bash
 pnpm dev
 ```
 
 This starts:
+
 - **Frontend** (port 80 via Nginx): http://localhost
 - **Backend API** (internal port 3000): Proxied via Nginx to `/api`
 - **Redis** (port 6379): Cache & job queue
@@ -53,6 +60,7 @@ This starts:
 - **SonarQube** (port 9000): Code quality dashboard - http://localhost:9000
 
 **Run individual commands:**
+
 ```bash
 pnpm build          # Build all apps and packages
 pnpm test           # Run all tests
@@ -93,6 +101,7 @@ dragonvite/
 ## 🛠️ Technology Stack
 
 ### Frontend
+
 - **Vite** – Fast build tool & dev server
 - **React 18** – UI framework
 - **TypeScript** – Type safety
@@ -102,6 +111,7 @@ dragonvite/
 - **React Konva** – Canvas rendering for game map
 
 ### Backend
+
 - **Fastify** – High-performance HTTP server
 - **TypeScript** – Type safety
 - **Socket.io** – Real-time WebSocket communication
@@ -111,6 +121,7 @@ dragonvite/
 - **Pino** – Structured logging
 
 ### Infrastructure
+
 - **Docker & Docker Compose** – Local development
 - **Nginx** – Reverse proxy & static file server
 - **Redis** – Cache & job queue storage
@@ -120,6 +131,7 @@ dragonvite/
 - **GitHub Actions** – CI/CD
 
 ### Deployment
+
 - **Oracle Cloud Always Free** – $0/month hosting (2 vCPU, 4GB RAM VMs)
 - **Cloudflare R2** – Object storage
 - **Cloudflare CDN** – Content delivery
@@ -130,16 +142,19 @@ dragonvite/
 ### Database
 
 **Push schema changes to dev:**
+
 ```bash
 pnpm db:push
 ```
 
 **Create a migration:**
+
 ```bash
 pnpm db:migrate
 ```
 
 **Open Prisma Studio:**
+
 ```bash
 pnpm db:studio
 ```
@@ -147,16 +162,19 @@ pnpm db:studio
 ### Testing
 
 **Run all tests:**
+
 ```bash
 pnpm test
 ```
 
 **Watch mode:**
+
 ```bash
 pnpm test -- --watch
 ```
 
 **Run E2E tests:**
+
 ```bash
 pnpm test:e2e
 ```
@@ -164,11 +182,13 @@ pnpm test:e2e
 ### Code Quality
 
 **Run SonarQube analysis locally:**
+
 ```bash
 pnpm sonar
 ```
 
 **Access SonarQube dashboard:**
+
 - URL: http://localhost:9000
 - Default login: admin / admin
 - Change password on first login
@@ -180,6 +200,7 @@ pnpm build
 ```
 
 This:
+
 1. Type-checks all packages
 2. Builds the Docker image
 3. Prepares frontend static files
@@ -190,17 +211,20 @@ This:
 ### Oracle Cloud Always Free
 
 1. **Create an Oracle VM** ($0/month, always free tier)
+
    ```bash
    # Ubuntu 22.04 LTS, 2 ARM vCPU, 4GB RAM
    ```
 
 2. **Install Docker & Docker Compose on the VM**
+
    ```bash
    sudo apt update && sudo apt install -y docker.io docker-compose-plugin
    sudo usermod -aG docker $USER
    ```
 
 3. **Clone repo and start services**
+
    ```bash
    git clone <repo-url>
    cd dragonvite
@@ -216,6 +240,7 @@ This:
 ### GitHub Actions CI/CD
 
 Workflows automatically run on PR and merge to `main`:
+
 - `lint.yml` – ESLint + Prettier
 - `test.yml` – Vitest tests
 - `build.yml` – Docker build verification
@@ -235,6 +260,7 @@ Workflows automatically run on PR and merge to `main`:
    - Save token to GitHub Secrets as `SONAR_TOKEN`
 
 **Viewing analysis:**
+
 - Dashboard shows issues, bugs, code smells, coverage
 - Quality gates fail builds if gate not met
 
@@ -261,6 +287,7 @@ SENTRY_DSN=https://your-sentry-dsn
 ```
 
 **Using Doppler:**
+
 ```bash
 doppler run pnpm dev  # Inject all secrets automatically
 ```
@@ -283,18 +310,21 @@ doppler run pnpm dev  # Inject all secrets automatically
 ## 🆘 Troubleshooting
 
 **Docker Compose fails to start:**
+
 ```bash
 docker-compose down -v      # Remove all containers and volumes
 docker-compose up --build   # Rebuild from scratch
 ```
 
 **Prisma migration errors:**
+
 ```bash
 pnpm db:reset   # Reset database (dev only!)
 pnpm db:push    # Sync schema
 ```
 
 **Port conflicts:**
+
 ```bash
 # Check what's using port 80, 3000, etc.
 lsof -i :80
@@ -303,6 +333,7 @@ kill -9 <PID>
 ```
 
 **SonarQube password reset:**
+
 ```bash
 # Access SonarQube container shell
 docker exec -it dragonvite-sonarqube bash
