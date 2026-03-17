@@ -77,6 +77,7 @@ Turbo task order: `type-check` → `build` → `test`. The `build` task depends 
 ## Infrastructure
 
 Local dev and production use the same Docker Compose stack:
+
 - **Nginx** (port 80): serves frontend static files, proxies `/api` and `/socket.io` to `backend:3000`
 - **Backend** (port 3000): Fastify app
 - **Redis** (port 6379): BullMQ queue + cache
@@ -88,6 +89,7 @@ Production target: Oracle Cloud Always Free VMs. Deploy is manual-only (`workflo
 ## CI/CD
 
 GitHub Actions runs on PR and push to `main`:
+
 - `lint.yml` — ESLint + Prettier check
 - `test.yml` — Vitest (NODE_ENV=test)
 - `build.yml` — Docker buildx (no push, validates build)
