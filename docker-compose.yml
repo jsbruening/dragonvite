@@ -27,7 +27,7 @@ services:
     environment:
       REDIS_URL: redis://redis:6379
     command: >
-      sh -c "npm install -g @bull-board/express bull bullmq redis &&
+      sh -c "npm install @bull-board/express bull bullmq redis &&
              node -e \"
              const { createBullBoard } = require('@bull-board/express');
              const { ExpressAdapter } = require('@bull-board/express');
